@@ -5,7 +5,6 @@ import locale
 import requests
 import io
 from datetime import datetime
-import openpyxl
 
 def main():
     # Establecer el locale en español si está disponible
