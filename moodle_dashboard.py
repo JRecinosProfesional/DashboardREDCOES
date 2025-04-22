@@ -3,9 +3,6 @@ import requests
 import pandas as pd
 from datetime import datetime
 from bs4 import BeautifulSoup
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 def main():
     # CONFIGURACIÓN INICIAL
