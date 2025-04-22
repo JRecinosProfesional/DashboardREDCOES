@@ -4,9 +4,6 @@ import streamlit as st
 import moodle_dashboard
 import wordpress_dashboard
 import requests
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 # Configuración inicial
 st.set_page_config(page_title="Dashboard General REDCOES", layout="wide")
