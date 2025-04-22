@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 def main():
     # CONFIGURACIÓN INICIAL
     MOODLE_URL = "https://redcoes.edu.sv/aulavirtual/webservice/rest/server.php"
-    TOKEN = "54315bf201d534f9989aab54f144ad52"
+    TOKEN = os.getenv("MOODLE_TOKEN")
     HEADERS = {"Content-Type": "application/x-www-form-urlencoded"}
 
     # FUNCIONES DE API
