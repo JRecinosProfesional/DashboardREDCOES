@@ -5,10 +5,7 @@ import locale
 import requests
 import io
 from datetime import datetime
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-
+import openpyxl
 
 def main():
     # Establecer el locale en español si está disponible
