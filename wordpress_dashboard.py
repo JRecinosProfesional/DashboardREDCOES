@@ -59,9 +59,31 @@ def main():
         return df
 
     # Crear pestañas
-    tab1, tab2, tab3 = st.tabs(["📊 Pedidos", "📦 Productos", "👥 Miembros"])
+    tab1, tab2, tab3, tab4 = st.tabs(["🚀 Pedidos de Hoy", "📊 Pedidos", "📦 Productos", "👥 Miembros"])
 
     with tab1:
+        df = cargar_pedidos()
+        st.header("🚀 Pedidos de Hoy")
+
+        hoy = datetime.now().date()
+        pedidos_hoy = df[df['fecha_pedido'].dt.date == hoy]
+
+        if not pedidos_hoy.empty:
+            st.success(f"✅ Total pedidos hoy: {len(pedidos_hoy)}")
+
+            # Agrupar por producto
+            resumen_productos = pedidos_hoy['producto'].value_counts().reset_index()
+            resumen_productos.columns = ['Producto', 'Cantidad']
+
+            st.subheader("📋 Resumen por producto")
+            st.dataframe(resumen_productos, use_container_width=True)
+
+            st.subheader("📊 Gráfico de Pedidos de Hoy por Producto")
+            st.plotly_chart(px.bar(resumen_productos, x='Producto', y='Cantidad', title="Pedidos de Hoy por Producto"))
+        else:
+            st.warning("⚠️ No hay pedidos registrados hoy.")
+
+    with tab2:
         df = cargar_pedidos()
         st.header("📊 Dashboard de Pedidos REDCOES")
 
@@ -132,7 +154,7 @@ def main():
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
 
-    with tab2:
+    with tab3:
         df = cargar_productos()
         st.header("📦 Dashboard de Productos REDCOES")
 
@@ -185,7 +207,7 @@ def main():
             conteo_estados.columns = ['Estado', 'Cantidad']
             st.plotly_chart(px.pie(conteo_estados, names='Estado', values='Cantidad', title="Distribución por estado"))
 
-    with tab3:
+    with tab4:
         df = cargar_miembros()
         st.header("👥 Dashboard de Participantes REDCOES")
 
